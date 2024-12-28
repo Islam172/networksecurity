@@ -25,7 +25,7 @@ from networksecurity.entity.artifact_entity import (
 )
 
 from networksecurity.constants.training_pipeline import TRAINING_BUCKET_NAME
-#from networksecurity.cloud.s3_syncer import S3Sync
+from networksecurity.cloud.s3_syncer import S3Sync
 from networksecurity.constants.training_pipeline import SAVED_MODEL_DIR
 
 
@@ -39,7 +39,7 @@ class TrainingPipeline:
         Initializes the training pipeline with configurations and S3 syncer.
         """
         self.training_pipeline_config = TrainingPipelineConfig()  # Load pipeline configurations.
-        #self.s3_sync = S3Sync()  # Initialize the S3 sync utility.
+        self.s3_sync = S3Sync()  # Initialize the S3 sync utility.
 
 
     def start_data_ingestion(self):
@@ -133,7 +133,29 @@ class TrainingPipeline:
             return model_trainer_artifact
         except Exception as e:
             raise NetworkSecurityException(e, sys)
-        
+
+    def sync_artifact_dir_to_s3(self):
+        """
+        Syncs local artifacts (data and models) to an S3 bucket for storage.
+        """
+        try:
+            aws_bucket_url = f"s3://{TRAINING_BUCKET_NAME}/artifact/{self.training_pipeline_config.timestamp}"
+            self.s3_sync.sync_folder_to_s3(folder=self.training_pipeline_config.artifact_dir, aws_bucket_url=aws_bucket_url)
+        except Exception as e:
+            raise NetworkSecurityException(e, sys)
+
+
+
+    def sync_saved_model_dir_to_s3(self):
+        """
+        Syncs the local final trained model to an S3 bucket for deployment and sharing.
+        """
+        try:
+            aws_bucket_url = f"s3://{TRAINING_BUCKET_NAME}/final_model/{self.training_pipeline_config.timestamp}"
+            self.s3_sync.sync_folder_to_s3(folder=self.training_pipeline_config.model_dir, aws_bucket_url=aws_bucket_url)
+        except Exception as e:
+            raise NetworkSecurityException(e, sys)
+     
 
     def run_pipeline(self):
         """
@@ -156,8 +178,8 @@ class TrainingPipeline:
             model_trainer_artifact = self.start_model_trainer(data_transformation_artifact=data_transformation_artifact)
             
             # Step 5: Sync artifacts and models to S3
-            #self.sync_artifact_dir_to_s3()
-            #self.sync_saved_model_dir_to_s3()
+            self.sync_artifact_dir_to_s3()
+            self.sync_saved_model_dir_to_s3()
             
             return model_trainer_artifact
         except Exception as e:
