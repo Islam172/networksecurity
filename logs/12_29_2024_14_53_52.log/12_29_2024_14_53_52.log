@@ -1,0 +1,27 @@
+[ 2024-12-29 14:53:57,440 ] 1025 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+[ 2024-12-29 14:53:57,455 ] 107 dagshub - INFO - Accessing as ielmaaroufi4
+[ 2024-12-29 14:53:57,705 ] 1025 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/repos/ielmaaroufi4/networksecurity "HTTP/1.1 200 OK"
+[ 2024-12-29 14:53:57,935 ] 1025 httpx - INFO - HTTP Request: GET https://dagshub.com/api/v1/user "HTTP/1.1 200 OK"
+[ 2024-12-29 14:53:57,937 ] 107 dagshub - INFO - Initialized MLflow to track repo "ielmaaroufi4/networksecurity"
+[ 2024-12-29 14:53:57,937 ] 107 dagshub - INFO - Repository ielmaaroufi4/networksecurity initialized!
+[ 2024-12-29 14:54:17,204 ] 54 root - INFO - Start data ingestion process
+[ 2024-12-29 14:54:19,178 ] 96 root - INFO - Performed train-test split on the DataFrame.
+[ 2024-12-29 14:54:19,259 ] 109 root - INFO - Exported train and test datasets to files.
+[ 2024-12-29 14:54:19,259 ] 59 root - INFO - Data ingestion completed. Artifact: DataIngestionArtifact(trained_file_path='Artifacts/12_29_2024_14_53_53/data_ingestion/ingested/train.csv', test_file_path='Artifacts/12_29_2024_14_53_53/data_ingestion/ingested/test.csv')
+[ 2024-12-29 14:54:19,268 ] 82 root - INFO - Initiate data validation process
+[ 2024-12-29 14:54:19,295 ] 75 root - INFO - Required number of columns: 31
+[ 2024-12-29 14:54:19,295 ] 76 root - INFO - Data frame has columns: 31
+[ 2024-12-29 14:54:19,295 ] 75 root - INFO - Required number of columns: 31
+[ 2024-12-29 14:54:19,295 ] 76 root - INFO - Data frame has columns: 31
+[ 2024-12-29 14:54:19,504 ] 97 root - INFO - Entered initiate_data_transformation method of DataTransformation class
+[ 2024-12-29 14:54:19,531 ] 72 root - INFO - Entered get_data_transformer_object method of DataTransformation class
+[ 2024-12-29 14:54:19,531 ] 76 root - INFO - Initialized KNNImputer with {'missing_values': nan, 'n_neighbors': 3, 'weights': 'uniform'}
+[ 2024-12-29 14:54:19,554 ] 71 root - INFO - Entered the save_object method of MainUtils class
+[ 2024-12-29 14:54:19,556 ] 75 root - INFO - Exited the save_object method of MainUtils class
+[ 2024-12-29 14:54:19,556 ] 71 root - INFO - Entered the save_object method of MainUtils class
+[ 2024-12-29 14:54:19,559 ] 75 root - INFO - Exited the save_object method of MainUtils class
+[ 2024-12-29 14:58:31,607 ] 71 root - INFO - Entered the save_object method of MainUtils class
+[ 2024-12-29 14:58:31,664 ] 75 root - INFO - Exited the save_object method of MainUtils class
+[ 2024-12-29 14:58:31,664 ] 71 root - INFO - Entered the save_object method of MainUtils class
+[ 2024-12-29 14:58:31,710 ] 75 root - INFO - Exited the save_object method of MainUtils class
+[ 2024-12-29 14:58:31,710 ] 125 root - INFO - Model trainer artifact: ModelTrainerArtifact(trained_model_file_path='Artifacts/12_29_2024_14_53_53/model_trainer/trained_model/model.pkl', train_metric_artifact=ClassificationMetricArtifact(f1_score=0.9906981498517837, precision_score=0.988374464613502, recall_score=0.9930327868852459), test_metric_artifact=ClassificationMetricArtifact(f1_score=0.9790372670807453, precision_score=0.970746728252502, recall_score=0.9874706342991386))
